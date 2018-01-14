@@ -38,6 +38,17 @@ describe("interval pool", () => {
   });
 
 
+  it('should resolve sync', async ()=>{
+    const queue = new QInterval();
+
+    const dt = Date.now();
+    await queue.queue(()=>1);
+    const lapsed = Date.now() - dt;
+
+    expect(lapsed).toBeGreaterThanOrEqual(def_interval);
+    expect(lapsed).toBeLessThanOrEqual(def_interval + threshold)
+  });
+
   it("should fail ", async () => {
     const queue = new QInterval();
 
@@ -159,4 +170,19 @@ describe("interval pool", () => {
       expect(lapsed).toBeGreaterThanOrEqual(queue.interval * (n-1))
       expect(l).toBe(n);
     });
+
+
+    it("invalid function", async ()=>{
+      const queue = new QInterval();
+
+      expect.assertions(1);
+
+      try {
+        await queue.queue(()=>{
+          throw new Error('fail')});
+      }
+      catch (e) {
+        expect(e.message).toContain("fail");
+      }
+    })
 });

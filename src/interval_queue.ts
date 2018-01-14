@@ -36,6 +36,8 @@ export class iLazy<T> extends Lazy<T> {
         this.resolved = new Date();
         this.error = e;
         this.failed = true;
+
+        throw e;
       }
     });
     this.created = new Date();

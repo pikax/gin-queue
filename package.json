@@ -6,6 +6,11 @@
   "repository": "https://github.com/pikax/gin-queue.git",
   "author": "pikax",
   "license": "MIT",
+  "scripts": {
+    "dist": "rollup -c",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
   "private": false,
   "jest": {
     "moduleFileExtensions": [
