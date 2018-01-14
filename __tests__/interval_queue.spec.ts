@@ -6,10 +6,6 @@ const threshold = 4;
 
 describe("interval pool", () => {
 
-  function createPromise<T>(value?: T) {
-    return Promise.resolve(value || 1);
-  }
-
   function createTimeoutPromise<T>(timeout: number, value?: T) {
     return pTimeout(timeout).then(x => value || 1)
   }
