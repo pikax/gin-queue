@@ -9,9 +9,9 @@ export declare class iLazy<T> extends Lazy<T> {
     constructor(_func: () => T);
 }
 export declare class QInterval {
-    private _config;
-    currentLazy: iLazy<any>;
+    last: iLazy<any>;
     readonly interval: number;
-    constructor(_config?: IGinIntervalConfig);
+    private _config;
+    constructor(config?: Partial<IGinIntervalConfig>);
     queue<T>(func: () => T): Promise<T>;
 }

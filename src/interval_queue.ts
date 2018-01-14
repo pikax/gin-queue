@@ -44,24 +44,28 @@ export class iLazy<T> extends Lazy<T> {
 
 
 export class QInterval {
-  currentLazy: iLazy<any>;
+  last: iLazy<any>;
 
   get interval(){
-    return this._config.requestInterval;
+    return this._config.interval;
   }
 
-  constructor(private _config: IGinIntervalConfig = interval()) {
+  private _config: IGinIntervalConfig;
+
+  constructor(config?: Partial<IGinIntervalConfig>){
+    this._config = {...interval(),...config};
   }
+
 
   async queue<T>(func: () => T): Promise<T> {
-    const prev = this.currentLazy;
+    const prev = this.last;
 
     const current = new iLazy(func);
-    this.currentLazy = current;
+    this.last = current;
 
     if (prev) {
       // let wait the time we should at least
-      const w = (prev.created.getTime() + this._config.requestInterval) - Date.now();
+      const w = (prev.created.getTime() + this._config.interval) - Date.now();
       if (w > 0) {
         await pTimeout(w);
       }
@@ -80,7 +84,7 @@ export class QInterval {
 
       //note probably remove this
       // // let wait the time we should at least
-      // const w2 = (prev.started.getTime() + this._config.requestInterval) - Date.now();
+      // const w2 = (prev.started.getTime() + this._config.interval) - Date.now();
       // if (w2 > 0) {
       //   console.log('w2: %dms', w2)
       //

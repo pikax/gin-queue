@@ -11,11 +11,11 @@ export interface IGinQueue {
     queue<T>(func: () => T | Promise<T>): Promise<T>;
 }
 export interface IGinConcurrentConfig extends IGinQueueConfig {
-    simultaneousRequests: number;
-    maxQueueSize: number;
-    safeQueueSize: number;
+    maxConcurrent: number;
+    maxSize: number;
+    safeSize: number;
 }
 export interface IGinIntervalConfig extends IGinQueueConfig {
-    requestInterval: number;
+    interval: number;
 }
 export declare const _TICK_: number;

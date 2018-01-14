@@ -27,13 +27,13 @@ export interface IGinQueue {
 
 
 export interface IGinConcurrentConfig extends IGinQueueConfig{
-  simultaneousRequests: number;
-  maxQueueSize: number; // after hitting this size the queue will wait until promise level go as much as safeQueueSize
-  safeQueueSize: number; //
+  maxConcurrent: number;
+  maxSize: number; // after hitting this size the queue will wait until promise level go as much as safeSize
+  safeSize: number; //
 }
 
 export interface IGinIntervalConfig extends IGinQueueConfig{
-  requestInterval: number;
+  interval: number;
 }
 
 
