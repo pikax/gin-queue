@@ -32,7 +32,7 @@ describe("interval pool", () => {
     const dt = Date.now();
     await queue.queue(successGen(1));
     const lapsed = Date.now() - dt;
-
+  .travis.yml
     expect(lapsed).toBeGreaterThanOrEqual(def_interval);
     expect(lapsed).toBeLessThanOrEqual(def_interval + threshold)
   });
