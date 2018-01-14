@@ -38,11 +38,12 @@ describe("interval pool", () => {
     const queue = new QInterval();
 
     const dt = Date.now();
+    queue.queue(successGen(1));
     await queue.queue(()=>1);
     const lapsed = Date.now() - dt;
 
-    expect(lapsed).toBeGreaterThanOrEqual(def_interval);
-    expect(lapsed).toBeLessThanOrEqual(def_interval + threshold)
+    expect(lapsed).toBeGreaterThanOrEqual(queue.interval);
+    expect(lapsed).toBeLessThanOrEqual(queue.interval + threshold)
   });
 
   it("should fail ", async () => {
